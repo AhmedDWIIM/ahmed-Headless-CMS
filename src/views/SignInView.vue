@@ -24,6 +24,7 @@
 
 </template>
 <script>
+import { mapActions } from 'vuex';
 export default {
     data(){
         return{
@@ -33,6 +34,7 @@ export default {
     },
     name:"signUp",
     methods:{
+      ...mapActions('user', ["setUser"]),
         async loginUser(){
             const {data: user, error} = await this.$supabase.auth.signIn({
                 email:this.email,

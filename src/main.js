@@ -4,7 +4,7 @@ import router from './router';
 import store from './store';
 
 import '@/scss/init.scss';
-import { supabase } from './supabase.';
+import { supabase } from './supabase';
 
 Vue.config.productionTip = false;
 Vue.prototype.$supabase = supabase;

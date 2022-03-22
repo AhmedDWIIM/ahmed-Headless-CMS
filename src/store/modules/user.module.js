@@ -3,7 +3,7 @@ const state = {
 };
 
 const actions = {
-  setUser(commit, payload) {
+  setUser({commit}, payload) {
     commit("setUser", payload);
   },
 };

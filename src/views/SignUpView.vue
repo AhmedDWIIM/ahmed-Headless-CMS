@@ -34,7 +34,7 @@ export default {
     name:"signUp",
     methods:{
         async createUser(){
-            const {data: user, error} = await this.$supabase.auth.api.createUser({
+            const {data: user, error} = await this.$supabase.auth.signUp({
                 email:this.email,
                 password:this.password,
             })

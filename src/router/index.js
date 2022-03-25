@@ -33,11 +33,11 @@ const routes = [
     },
   },
   {
-    path: '/about',
-    name: 'about',
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
-    meta: {
-      requireAuth: false,
+      path: '/profile',
+      name: 'profile',
+      component: () => import(/* webpackChunkName: "about" */ '../views/feed_perso.vue'),
+      meta: {
+        requireAuth: true,
     },
   },
 ];

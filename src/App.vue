@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <Navbar />
-    <nav>
+    <nav v-if="user_data.email">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/profile">My profile</router-link>
     </nav>
     <router-view/>
   </div>
@@ -11,8 +11,11 @@
 
 <script>
 import Navbar from "@/components/Navbar.vue"
-
+import {mapState, mapActions} from "vuex";
 export default {
+   computed: {
+    ...mapState("user", ["user_data"]),
+  },
   components: {
     Navbar
   }

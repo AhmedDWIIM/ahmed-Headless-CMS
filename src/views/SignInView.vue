@@ -1,23 +1,22 @@
 <template>
   <div>
-    <h2>Sign In</h2>
+
 <div id="form">
+   <h2 id="myTitle">S’identifier</h2>
   <!-- Email input -->
   <div class="form-outline mb-4">
-    <label class="form-label" for="form2Example1">Email address</label>
-    <input v-model="email" type="email" id="form2Example1" class="form-control" />
+    <input v-model="email" type="email" id="form2Example1" class="form-control" placeholder="Email address" />
   </div>
 
   <!-- Password input -->
   <div class="form-outline mb-4">
-    <label class="form-label" for="form2Example2">Password</label>
-    <input v-model="password" type="password" id="form2Example2" class="form-control" />
+    <input v-model="password" type="password" id="form2Example2" class="form-control" placeholder="Password"/>
   </div>
 
   <!-- 2 column grid layout for inline styling -->
 
   <!-- Submit button -->
-  <button @click="loginUser()" type="button" class="btn btn-primary btn-block mb-4">Sign in</button>
+  <button @click="loginUser()" type="button" class="btn btn-dark">Sign in</button>
 
 </div>
 </div>
@@ -35,6 +34,9 @@ export default {
     name:"signUp",
     methods:{
       ...mapActions('user', ["setUser"]),
+       goTo(name){
+      this.$router.push({name: name})
+      },
         async loginUser(){
             const {data: user, error} = await this.$supabase.auth.signIn({
                 email:this.email,
@@ -42,6 +44,7 @@ export default {
             })
             if(user){
               console.log(user);
+              this.goTo('home');
             }
             else if(error){
               console.log(error);

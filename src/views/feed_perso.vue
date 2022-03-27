@@ -1,17 +1,22 @@
 <template>
 
-  <div class="about">
+  <div>
+  <div  class="about">
     <li v-for="(item,index) in articles" :key="index">
       <div v-if="item.name == user_data.email" class="card" style="width: 18rem;">
         <img :src="item.img" class="card-img-top" alt="...">
         <div class="card-body">
         <h5 class="card-title">{{item.name}}</h5>
         <p class="card-text">{{item.description}}</p>
+
         <button type="button" id="btn" class="btn btn-secondary" @click="deleteArticle(item.id)">Delete</button>
+        <button type="button" id="btn" class="btn btn-dark" @click="updatePost()">Update</button>
       </div>
       </div>
     </li>
+    </div>
     <div id="addCard">
+      <h2 id="myTitle">Nouveau post</h2>
         <div class="mb-3 row">
         <label for="staticEmail" class="col-sm-2 col-form-label">E-mail</label>
         <div class="col-sm-10">
@@ -30,7 +35,7 @@
           <input v-model="form.image" type="text" class="form-control" id="inputPassword">
         </div>
       </div>
-      <button type="button" id="btn" class="btn btn-secondary" @click="addArticle()">Create</button>
+      <button type="button" id="btn" class="btn btn-dark" @click="addArticle()">Create</button>
     </div>
   </div>
 
@@ -51,6 +56,9 @@ export default {
       form :{
         descr: null,
         image : null,
+      },
+      post: {
+        image_description : null,
       }
     }
   },
@@ -58,6 +66,12 @@ export default {
     this.getAllArticles();
   },
   methods: {
+    async updatePost() {
+      const { data, error } = await this.$supabase
+        .from('articles')
+        .update({ image_description: this.post.image_description })
+        .match({ id: this.$route.params.id })
+    },
     async deleteArticle(id) {
       const {data, error } = await this.$supabase.from("articles").delete().match({ id : id })
       if (data) {

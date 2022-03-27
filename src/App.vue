@@ -1,10 +1,7 @@
 <template>
   <div id="app">
     <Navbar />
-    <nav v-if="user_data.email">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/profile">My profile</router-link>
-    </nav>
+
     <router-view/>
   </div>
 </template>
